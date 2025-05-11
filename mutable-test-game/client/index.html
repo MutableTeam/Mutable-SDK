@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutable Coin Collector</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="login-screen" class="screen">
+            <h1>Mutable Coin Collector</h1>
+            <div class="form-group">
+                <input type="text" id="player-name" placeholder="Enter your name">
+                <button id="login-button">Play as Guest</button>
+            </div>
+        </div>
+        
+        <div id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <div class="player-info">
+                    <span id="player-name-display"></span>
+                </div>
+                <div class="game-stats">
+                    <div>Score: <span id="score">0</span></div>
+                    <div>Coins: <span id="coin-balance">0</span></div>
+                    <div>Time: <span id="time">60</span>s</div>
+                </div>
+            </div>
+            
+            <canvas id="game-canvas" width="800" height="600"></canvas>
+            
+            <div class="game-controls">
+                <button id="start-button">Start Game</button>
+                <button id="end-button" disabled>End Game</button>
+            </div>
+        </div>
+        
+        <div id="end-screen" class="screen hidden">
+            <h1>Game Over!</h1>
+            <div class="end-stats">
+                <p>Final Score: <span id="final-score">0</span></p>
+                <p>Coins Earned: <span id="coins-earned">0</span></p>
+                <p>Total Balance: <span id="total-balance">0</span></p>
+            </div>
+            <button id="play-again-button">Play Again</button>
+        </div>
+    </div>
+    
+    <!-- Load the Mutable SDK -->
+    <script src="../dist/index.js"></script>
+    
+    <!-- Load game scripts -->
+    <script src="sdk-integration.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
