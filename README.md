@@ -32,13 +32,13 @@ Mutable SDK is a comprehensive platform that enables game developers to integrat
 ### NPM Installation
 
 ```shellscript
-npm install @mutable/sdk
+npm install @mutablepvp/sdk
 ```
 
 ### Yarn Installation
 
 ```shellscript
-yarn add @mutable/sdk
+yarn add @mutablepvp/sdk
 ```
 
 ### CDN Usage
@@ -56,7 +56,7 @@ Sign up at [developer.mutable.io](https://developer.mutable.io) to get your API 
 ### 2. Initialize the SDK
 
 ```javascript
-import { MutableSDK } from '@mutable/sdk';
+import { MutableSDK } from '@mutablepvp/sdk';
 
 const sdk = new MutableSDK({
   apiKey: 'YOUR_API_KEY',
@@ -461,7 +461,7 @@ class GodotBridgeModule {
 ### Basic Game Flow
 
 ```javascript
-import { MutableSDK } from '@mutable/sdk';
+import { MutableSDK } from '@mutablepvp/sdk';
 
 async function runGame() {
   // Initialize SDK
@@ -505,11 +505,11 @@ async function runGame() {
 
 ### More Examples
 
-Check out the [examples directory](https://github.com/mutable/sdk/tree/main/examples) for more detailed examples:
+Check out the [examples directory](https://github.com/mutablepvp/sdk/tree/main/examples) for more detailed examples:
 
-- [Basic Usage](https://github.com/mutable/sdk/tree/main/examples/basic-usage.ts)
-- [Unity Integration](https://github.com/mutable/sdk/tree/main/examples/unity-usage.js)
-- [Godot Integration](https://github.com/mutable/sdk/tree/main/examples/godot-usage.js)
+- [Basic Usage](https://github.com/mutablepvp/sdk/tree/main/examples/basic-usage.ts)
+- [Unity Integration](https://github.com/mutablepvp/sdk/tree/main/examples/unity-usage.js)
+- [Godot Integration](https://github.com/mutablepvp/sdk/tree/main/examples/godot-usage.js)
 
 
 ## Troubleshooting
