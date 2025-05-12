@@ -4,11 +4,11 @@ The official SDK for integrating with the Mutable gaming platform.
 
 ## Installation
 
-\`\`\`bash
+```bash
 npm install @mutable/sdk
 # or
 yarn add @mutable/sdk
-\`\`\`
+```
 
 ## Quick Start
 
