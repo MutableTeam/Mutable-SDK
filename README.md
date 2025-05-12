@@ -563,14 +563,12 @@ Full documentation is available at [docs.mutable.io](https://docs.mutable.io)
 
 ### Community
 
-- [Discord Community](https://discord.gg/mutable)
-- [Forum](https://forum.mutable.io)
+- [Discord Community](https://discord.com/invite/3StPKauz)
 
 
 ### Contact
 
-- Email: [support@mutable.io](mailto:support@mutable.io)
-- [Submit a support ticket](https://support.mutable.io)
+- Email: [support@mutable.io](mailto:mutablepvp@gmail.com)
 
 
 ## License
