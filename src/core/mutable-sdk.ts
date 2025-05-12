@@ -7,8 +7,11 @@
 import { AuthModule } from "../modules/auth"
 import { GameStateModule } from "../modules/game-state"
 import { TransactionsModule } from "../modules/transactions"
+import { AnalyticsModule } from "../modules/analytics"
+import { UnityBridgeModule } from "../modules/unity-bridge"
+import { GodotBridgeModule } from "../modules/godot-bridge"
 import { Logger } from "../utils/logger"
-import { MutableSDKConfig, GameInfo, PlayerInfo } from "../types"
+import type { MutableSDKConfig, GameInfo, PlayerInfo } from "../types"
 
 /**
  * Main SDK class that provides access to all Mutable platform features
@@ -22,6 +25,9 @@ export class MutableSDK {
   public auth: AuthModule
   public gameState: GameStateModule
   public transactions: TransactionsModule
+  public analytics: AnalyticsModule
+  public unityBridge: UnityBridgeModule
+  public godotBridge: GodotBridgeModule
 
   // Game and player information
   private gameInfo?: GameInfo
@@ -37,6 +43,7 @@ export class MutableSDK {
       environment: "production",
       debug: false,
       apiUrl: this.getDefaultApiUrl(config.environment || "production"),
+      websocketUrl: this.getDefaultWebsocketUrl(config.environment || "production"),
       ...config,
     }
 
@@ -47,6 +54,9 @@ export class MutableSDK {
     this.auth = new AuthModule(this.config, this.logger)
     this.gameState = new GameStateModule(this.config, this.logger)
     this.transactions = new TransactionsModule(this.config, this.logger)
+    this.analytics = new AnalyticsModule(this.config, this.logger)
+    this.unityBridge = new UnityBridgeModule(this.config, this.logger)
+    this.godotBridge = new GodotBridgeModule(this.config, this.logger)
 
     this.logger.info("MutableSDK instance created")
   }
@@ -69,6 +79,9 @@ export class MutableSDK {
       await this.auth.initialize()
       await this.gameState.initialize(gameInfo)
       await this.transactions.initialize()
+      await this.analytics.initialize(gameInfo)
+      await this.unityBridge.initialize()
+      await this.godotBridge.initialize()
 
       this.initialized = true
       this.logger.info("MutableSDK initialized successfully")
@@ -87,6 +100,9 @@ export class MutableSDK {
     this.auth.setPlayer(playerInfo)
     this.gameState.setPlayer(playerInfo)
     this.transactions.setPlayer(playerInfo)
+    this.analytics.setPlayer(playerInfo)
+    this.unityBridge.setPlayer(playerInfo)
+    this.godotBridge.setPlayer(playerInfo)
 
     this.logger.info("Player information set", playerInfo)
   }
@@ -131,6 +147,21 @@ export class MutableSDK {
       case "production":
       default:
         return "https://api.mutable.io"
+    }
+  }
+
+  /**
+   * Get the default WebSocket URL based on environment
+   */
+  private getDefaultWebsocketUrl(environment: string): string {
+    switch (environment) {
+      case "development":
+        return "wss://dev-ws.mutable.io"
+      case "staging":
+        return "wss://staging-ws.mutable.io"
+      case "production":
+      default:
+        return "wss://ws.mutable.io"
     }
   }
 }

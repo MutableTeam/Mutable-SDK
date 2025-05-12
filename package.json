@@ -1,5 +1,5 @@
 {
-  "name": "@mutable/sdk",
+  "name": "@mutablepvp/sdk",
   "version": "1.0.0",
   "description": "SDK for integrating with the Mutable gaming platform",
   "main": "dist/index.js",

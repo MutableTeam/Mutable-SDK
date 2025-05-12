@@ -8,6 +8,7 @@ interface MutableSDKConfig {
     environment?: "development" | "staging" | "production";
     debug?: boolean;
     apiUrl?: string;
+    websocketUrl?: string;
 }
 interface PlayerInfo {
     id: string;
@@ -21,18 +22,6 @@ interface GameInfo {
     version: string;
     buildId?: string;
 }
-interface TransactionInfo {
-    id: string;
-    type: "deposit" | "withdrawal" | "wager" | "reward" | "purchase";
-    amount: number;
-    currency: string;
-    timestamp: number;
-    status: "pending" | "completed" | "failed";
-    playerId: string;
-    gameId?: string;
-    sessionId?: string;
-    txHash?: string;
-}
 
 /**
  * Logger
@@ -40,7 +29,7 @@ interface TransactionInfo {
  * Provides logging functionality for the SDK.
  */
 declare class Logger {
-    private debug;
+    private isDebugEnabled;
     private prefix;
     constructor(debug?: boolean);
     /**
@@ -157,6 +146,137 @@ declare class TransactionsModule {
 }
 
 /**
+ * Analytics Module
+ *
+ * Tracks game events and player behavior for analytics.
+ */
+
+declare class AnalyticsModule {
+    private config;
+    private logger;
+    private gameInfo?;
+    private player?;
+    private sessionId?;
+    constructor(config: MutableSDKConfig, logger: Logger);
+    /**
+     * Initialize the analytics module
+     * @param gameInfo Game information
+     */
+    initialize(gameInfo: GameInfo): Promise<void>;
+    /**
+     * Set the current player
+     * @param player Player information
+     */
+    setPlayer(player: PlayerInfo): void;
+    /**
+     * Set the current session ID
+     * @param sessionId Session ID
+     */
+    setSessionId(sessionId: string): void;
+    /**
+     * Track a game event
+     * @param eventType Type of event
+     * @param data Additional event data
+     */
+    trackEvent(eventType: string, data?: Record<string, any>): void;
+    /**
+     * Track game start event
+     * @param data Additional event data
+     */
+    trackGameStart(data?: Record<string, any>): void;
+    /**
+     * Track game end event
+     * @param data Additional event data
+     */
+    trackGameEnd(data?: Record<string, any>): void;
+    /**
+     * Clean up resources
+     */
+    cleanup(): void;
+}
+
+/**
+ * Unity Bridge Module
+ *
+ * Provides integration with Unity game engine.
+ */
+
+declare class UnityBridgeModule {
+    private config;
+    private logger;
+    private player?;
+    private unityInstance?;
+    constructor(config: MutableSDKConfig, logger: Logger);
+    /**
+     * Initialize the Unity bridge module
+     */
+    initialize(): Promise<void>;
+    /**
+     * Set the current player
+     * @param player Player information
+     */
+    setPlayer(player: PlayerInfo): void;
+    /**
+     * Load Unity WebGL build
+     * @param containerId ID of the container element
+     * @param unityConfig Unity configuration
+     */
+    loadUnity(containerId: string, unityConfig: any): Promise<any>;
+    /**
+     * Send a message to Unity
+     * @param methodName Method name to call in Unity
+     * @param value Value to pass to the method
+     * @param objectName GameObject name (default: "MutableSDKBridge")
+     */
+    sendToUnity(methodName: string, value: any, objectName?: string): void;
+    /**
+     * Handle a message from Unity
+     * @param message Message from Unity
+     */
+    handleUnityMessage(message: string): void;
+}
+
+/**
+ * Godot Bridge Module
+ *
+ * Provides integration with Godot game engine.
+ */
+
+declare class GodotBridgeModule {
+    private config;
+    private logger;
+    private player?;
+    private godotInstance?;
+    constructor(config: MutableSDKConfig, logger: Logger);
+    /**
+     * Initialize the Godot bridge module
+     */
+    initialize(): Promise<void>;
+    /**
+     * Set the current player
+     * @param player Player information
+     */
+    setPlayer(player: PlayerInfo): void;
+    /**
+     * Load Godot WebGL build
+     * @param containerId ID of the container element
+     * @param godotConfig Godot configuration
+     */
+    loadGodot(containerId: string, godotConfig: any): Promise<any>;
+    /**
+     * Send a message to Godot
+     * @param methodName Method name to call in Godot
+     * @param value Value to pass to the method
+     */
+    sendToGodot(methodName: string, value: string): void;
+    /**
+     * Handle a message from Godot
+     * @param message Message from Godot
+     */
+    handleGodotMessage(message: string): void;
+}
+
+/**
  * Mutable SDK Core
  *
  * The main SDK class that provides access to all Mutable platform features.
@@ -172,6 +292,9 @@ declare class MutableSDK {
     auth: AuthModule;
     gameState: GameStateModule;
     transactions: TransactionsModule;
+    analytics: AnalyticsModule;
+    unityBridge: UnityBridgeModule;
+    godotBridge: GodotBridgeModule;
     private gameInfo?;
     private playerInfo?;
     /**
@@ -209,6 +332,10 @@ declare class MutableSDK {
      * Get the default API URL based on environment
      */
     private getDefaultApiUrl;
+    /**
+     * Get the default WebSocket URL based on environment
+     */
+    private getDefaultWebsocketUrl;
 }
 
 /**
@@ -219,4 +346,4 @@ declare class MutableSDK {
 
 declare const VERSION = "1.0.0";
 
-export { AuthModule, GameInfo, GameStateModule, MutableSDK, MutableSDKConfig, PlayerInfo, TransactionInfo, TransactionsModule, VERSION };
+export { AnalyticsModule, AuthModule, GameInfo, GameStateModule, GodotBridgeModule, MutableSDK, MutableSDKConfig, PlayerInfo, TransactionsModule, UnityBridgeModule, VERSION };

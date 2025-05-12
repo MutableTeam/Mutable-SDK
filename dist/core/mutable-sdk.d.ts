@@ -6,7 +6,10 @@
 import { AuthModule } from "../modules/auth";
 import { GameStateModule } from "../modules/game-state";
 import { TransactionsModule } from "../modules/transactions";
-import { MutableSDKConfig, GameInfo, PlayerInfo } from "../types";
+import { AnalyticsModule } from "../modules/analytics";
+import { UnityBridgeModule } from "../modules/unity-bridge";
+import { GodotBridgeModule } from "../modules/godot-bridge";
+import type { MutableSDKConfig, GameInfo, PlayerInfo } from "../types";
 /**
  * Main SDK class that provides access to all Mutable platform features
  */
@@ -17,6 +20,9 @@ export declare class MutableSDK {
     auth: AuthModule;
     gameState: GameStateModule;
     transactions: TransactionsModule;
+    analytics: AnalyticsModule;
+    unityBridge: UnityBridgeModule;
+    godotBridge: GodotBridgeModule;
     private gameInfo?;
     private playerInfo?;
     /**
@@ -54,4 +60,8 @@ export declare class MutableSDK {
      * Get the default API URL based on environment
      */
     private getDefaultApiUrl;
+    /**
+     * Get the default WebSocket URL based on environment
+     */
+    private getDefaultWebsocketUrl;
 }

@@ -8,6 +8,7 @@ export interface MutableSDKConfig {
     environment?: "development" | "staging" | "production";
     debug?: boolean;
     apiUrl?: string;
+    websocketUrl?: string;
 }
 export interface PlayerInfo {
     id: string;
@@ -20,16 +21,4 @@ export interface GameInfo {
     name: string;
     version: string;
     buildId?: string;
-}
-export interface TransactionInfo {
-    id: string;
-    type: "deposit" | "withdrawal" | "wager" | "reward" | "purchase";
-    amount: number;
-    currency: string;
-    timestamp: number;
-    status: "pending" | "completed" | "failed";
-    playerId: string;
-    gameId?: string;
-    sessionId?: string;
-    txHash?: string;
 }

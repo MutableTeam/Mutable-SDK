@@ -4,7 +4,7 @@
  * Provides logging functionality for the SDK.
  */
 export declare class Logger {
-    private debug;
+    private isDebugEnabled;
     private prefix;
     constructor(debug?: boolean);
     /**

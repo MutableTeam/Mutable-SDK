@@ -103,6 +103,25 @@ export interface UnityConfig {
   productVersion?: string
 }
 
+// Godot message types
+export interface GodotMessage {
+  type: string
+  data: any
+}
+
+// Godot configuration
+export interface GodotConfig {
+  engineUrl: string
+  executableUrl: string
+  projectZipUrl: string
+  canvasResizePolicy?: number
+  focusCanvas?: boolean
+  experimentalVK?: boolean
+  args?: string[]
+  gdextensionLibs?: string[]
+  persistentPaths?: string[]
+}
+
 // Event types for analytics
 export type EventType =
   | "game_start"
@@ -133,6 +152,8 @@ export enum ErrorCode {
   TRANSACTION_FAILED = "transaction_failed",
   UNITY_LOAD_ERROR = "unity_load_error",
   UNITY_COMMUNICATION_ERROR = "unity_communication_error",
+  GODOT_LOAD_ERROR = "godot_load_error",
+  GODOT_COMMUNICATION_ERROR = "godot_communication_error",
   INVALID_CONFIGURATION = "invalid_configuration",
   UNKNOWN_ERROR = "unknown_error",
 }
