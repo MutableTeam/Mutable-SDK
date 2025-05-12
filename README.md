@@ -5,15 +5,15 @@ The official SDK for integrating with the Mutable gaming platform.
 ## Installation
 
 ```bash
-npm install @mutable/sdk
+npm install @mutablepvp/sdk
 # or
-yarn add @mutable/sdk
+yarn add @mutablepvp/sdk
 ```
 
 ## Quick Start
 
 ```typescript
-import { MutableSDK } from '@mutable/sdk';
+import { MutableSDK } from '@mutablepvp/sdk';
 
 // Initialize the SDK
 const sdk = new MutableSDK({
