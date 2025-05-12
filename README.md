@@ -12,7 +12,7 @@ yarn add @mutable/sdk
 
 ## Quick Start
 
-\`\`\`typescript
+```typescript
 import { MutableSDK } from '@mutable/sdk';
 
 // Initialize the SDK
@@ -38,7 +38,7 @@ sdk.setPlayer(player);
 // Now you can use other SDK features
 const balance = await sdk.transactions.getBalance('MUTB');
 console.log(`Player balance: ${balance} MUTB`);
-\`\`\`
+```
 
 ## Features
 
@@ -50,13 +50,13 @@ console.log(`Player balance: ${balance} MUTB`);
 
 ## Documentation
 
-For full documentation, visit [docs.mutable.io](https://docs.mutable.io).
+NOT LIVE : For full documentation, visit [docs.mutable.io](https://docs.mutable.io).
 
 ## Examples
 
 ### Creating a Game Session
 
-\`\`\`typescript
+```typescript
 // Create a new game session
 const session = await sdk.gameState.createSession('standard', true);
 
@@ -71,11 +71,11 @@ await sdk.gameState.updatePlayerState(player.id, {
 
 // End the session
 await sdk.gameState.endSession([player.id]);
-\`\`\`
+```
 
 ### Handling Transactions
 
-\`\`\`typescript
+```typescript
 // Get player balance
 const balance = await sdk.transactions.getBalance('MUTB');
 
@@ -84,11 +84,11 @@ await sdk.transactions.placeWager(10, 'MUTB', gameId, sessionId);
 
 // Award a reward
 await sdk.transactions.awardReward(50, 'MUTB', gameId, sessionId);
-\`\`\`
+```
 
 ### Tracking Analytics
 
-\`\`\`typescript
+```typescript
 // Track game start
 sdk.analytics.trackGameStart({
   mode: 'standard',
@@ -101,11 +101,11 @@ sdk.analytics.trackEvent('custom', {
   level: 5,
   score: 1000
 });
-\`\`\`
+```
 
 ### Unity Integration
 
-\`\`\`typescript
+```typescript
 // Load Unity WebGL game
 await sdk.unityBridge.loadUnity('unity-canvas', {
   loaderUrl: 'Build/Game.loader.js',
@@ -124,7 +124,7 @@ sdk.unityBridge.sendMessage('GameManager', 'StartGame', {
 sdk.unityBridge.on('score_update', (data) => {
   console.log('Score updated:', data.score);
 });
-\`\`\`
+```
 
 ## License
 
