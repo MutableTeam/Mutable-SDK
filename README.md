@@ -557,13 +557,10 @@ const sdk = new MutableSDK({
 
 ## Support
 
-### Documentation
-
-Full documentation is available at [docs.mutable.io](https://docs.mutable.io)
 
 ### Community
 
-- [Discord Community](https://discord.com/invite/3StPKauz)
+- [Discord Community](https://discord.gg/p4NpUd3mH2)
 
 
 ### Contact
@@ -577,4 +574,4 @@ This SDK is licensed under the [MIT License](LICENSE).
 
 ---
 
-© 2023 Mutable. All rights reserved.
+© 2025 Mutable. All rights reserved.
